@@ -31,7 +31,7 @@ To use the complete form generator application:
 
 ```jsx
 import React from 'react';
-import { FormGeneratorApp } from 'lkh-form-builder';
+import { FormGeneratorApp } from 'lkh-form-generator';
 
 function App() {
   return (
@@ -48,7 +48,7 @@ export default App;
 
 ```jsx
 import React from 'react';
-import { FormBuilder, FormPreview } from 'lkh-form-builder';
+import { FormBuilder, FormPreview } from 'lkh-form-generator';
 
 function CustomFormBuilder() {
   const handlePreview = (fields) => {
