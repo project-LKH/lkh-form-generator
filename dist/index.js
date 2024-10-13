@@ -27,7 +27,7 @@ Object.defineProperty(exports, "FormPreview", {
     return _FormPreview.default;
   }
 });
-var _FormGeneratorApp = _interopRequireDefault(require("./FormGeneratorApp"));
+var _FormGeneratorApp = _interopRequireDefault(require("./components/FormGeneratorApp"));
 var _FormBuilder = _interopRequireDefault(require("./components/FormBuilder"));
 var _FormPreview = _interopRequireDefault(require("./components/FormPreview"));
 var _FormGenerator = _interopRequireDefault(require("./components/FormGenerator"));
