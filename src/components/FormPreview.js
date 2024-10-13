@@ -20,11 +20,10 @@ const FormPreview = ({ fields, onSubmit, onBack, onDownload, useForm }) => {
             Download Schema
           </Button>
         )}
-        (
+
         <Button variant="outlined" onClick={onBack} fullWidth sx={{ mt: 2 }}>
           Back to Form Builder
         </Button>
-        )
       </Box>
     </Paper>
   );
