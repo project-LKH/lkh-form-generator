@@ -1,70 +1,112 @@
-# Getting Started with Create React App
+# Form Generator Package
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A flexible and reusable React component library for building dynamic forms.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Using the Full App](#using-the-full-app)
+  - [Using Individual Components](#using-individual-components)
+- [Components](#components)
+  - [FormGeneratorApp](#formgeneratorapp)
+  - [FormBuilder](#formbuilder)
+  - [FormPreview](#formpreview)
+  - [FormGenerator](#formgenerator)
+- [API Reference](#api-reference)
+- [License](#license)
 
-### `npm start`
+## Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Install the package using npm:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
+npm install form-generator
+```
+## Usage
 
-### `npm test`
+### Using the Full App
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To use the complete form generator application:
 
-### `npm run build`
+```jsx
+import React from 'react';
+import { FormGeneratorApp } from 'form-generator-package';
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+function App() {
+  return (
+    <div>
+      <h1>My Form Generator</h1>
+      <FormGeneratorApp />
+    </div>
+  );
+}
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+export default App;
+```
+### Using Individual Components
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```jsx
+import React from 'react';
+import { FormBuilder, FormPreview } from 'form-generator-package';
 
-### `npm run eject`
+function CustomFormBuilder() {
+  const handlePreview = (fields) => {
+    // Custom preview logic
+  };
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+  return <FormBuilder onPreview={handlePreview} />;
+}
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+export default CustomFormBuilder;
+```
+## Components
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### FormGeneratorApp
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+The main component that includes the entire form generation workflow.
 
-## Learn More
+### FormBuilder
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+A component for building form schemas with various field types.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### FormPreview
 
-### Code Splitting
+A component for previewing and testing generated forms.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### FormGenerator
 
-### Analyzing the Bundle Size
+A component that renders a form based on a provided schema.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## API Reference
 
-### Making a Progressive Web App
+### FormGeneratorApp
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Props: None
 
-### Advanced Configuration
+### FormBuilder
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Props:
 
-### Deployment
+- onPreview: Function(fields) - Callback when the preview button is clicked
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### FormPreview
 
-### `npm run build` fails to minify
+Props:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- fields: Array - The form schema
+- onSubmit: Function(formData) - Callback when the form is submitted
+- onBack: Function - Callback to return to the form builder
+- onDownload: Function - Callback to download the form schema
+
+### FormGenerator
+
+Props:
+
+- fields: Array - The form schema
+- onSubmit: Function(formData) - Callback when the form is submitted
+
+## License
+
+This project is licensed under the MIT License.
+
