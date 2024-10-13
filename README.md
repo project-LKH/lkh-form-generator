@@ -21,7 +21,7 @@ A flexible and reusable React component library for building dynamic forms.
 Install the package using npm:
 
 ```bash
-npm install form-generator
+npm install lkh-form-generator
 ```
 ## Usage
 
@@ -31,7 +31,7 @@ To use the complete form generator application:
 
 ```jsx
 import React from 'react';
-import { FormGeneratorApp } from 'form-generator-package';
+import { FormGeneratorApp } from 'lkh-form-builder';
 
 function App() {
   return (
@@ -48,7 +48,7 @@ export default App;
 
 ```jsx
 import React from 'react';
-import { FormBuilder, FormPreview } from 'form-generator-package';
+import { FormBuilder, FormPreview } from 'lkh-form-builder';
 
 function CustomFormBuilder() {
   const handlePreview = (fields) => {
@@ -103,7 +103,52 @@ Props:
 
 Props:
 
-- fields: Array - The form schema
+- fields: Array - The form schema. eg:
+```json
+[
+  {
+    "label": "Full Name",
+    "type": "text",
+    "name": "fullName",
+    "required": true
+  },
+  {
+    "label": "Email Address",
+    "type": "email",
+    "name": "email",
+    "required": true
+  },
+  {
+    "label": "Age",
+    "type": "number",
+    "name": "age",
+    "required": false
+  },
+  {
+    "label": "Password",
+    "type": "password",
+    "name": "password",
+    "required": true
+  },
+  {
+    "label": "Country",
+    "type": "select",
+    "name": "country",
+    "required": true,
+    "options": [
+      { "value": "us", "label": "United States" },
+      { "value": "ca", "label": "Canada" },
+      { "value": "uk", "label": "United Kingdom" }
+    ]
+  },
+  {
+    "label": "Subscribe to newsletter",
+    "type": "checkbox",
+    "name": "newsletter",
+    "required": false
+  }
+]
+```
 - onSubmit: Function(formData) - Callback when the form is submitted
 
 ## License
