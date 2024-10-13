@@ -1,6 +1,6 @@
 {
   "name": "lkh-form-generator",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "main": "dist/index.js",
   "description": "A flexible and intuitive React component library for dynamically generating customizable forms. This package provides a modular set of components to easily create, preview, and manage form schemas. Ideal for developers looking to streamline form creation in React applications while maintaining clean, reusable code.",
   "files": [
