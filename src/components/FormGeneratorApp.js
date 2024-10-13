@@ -1,50 +1,33 @@
-import React, { useState } from 'react';
-import { Container, Typography, Box } from '@mui/material';
-import FormBuilder from './FormBuilder';
-import FormPreview from './FormPreview';
+// FormGeneratorApp.js
+import React from "react";
+import { Container, Typography, Box } from "@mui/material";
+import FormBuilder from "./FormBuilder";
+import FormPreview from "./FormPreview";
+import { useFormGenerator } from "./useFormGenerator";
 
-const FormGeneratorApp = () => {
-  const [formFields, setFormFields] = useState(null);
-  const [showBuilder, setShowBuilder] = useState(true);
-
-  const handlePreview = (fields) => {
-    setFormFields(fields);
-    setShowBuilder(false);
-  };
-
-  const handleBack = () => {
-    setShowBuilder(true);
-  };
+const FormGeneratorApp = ({ useForm, onSubmitOverride }) => {
+  const { formFields, showBuilder, handlePreview, handleBack, handleDownload } =
+    useFormGenerator();
 
   const handleSubmit = (formData) => {
-    console.log('Form submitted:', formData);
-  };
-
-  const handleDownload = () => {
-    const schema = JSON.stringify(formFields, null, 2);
-    const blob = new Blob([schema], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'form-schema.json';
-    link.click();
-    URL.revokeObjectURL(url);
+    console.log("Form submitted:", formData);
   };
 
   return (
     <Container maxWidth="sm">
       <Box sx={{ my: 4 }}>
         <Typography variant="h4" component="h1" gutterBottom>
-          {showBuilder ? 'Form Builder' : 'Form Preview'}
+          {showBuilder ? "Form Builder" : "Form Preview"}
         </Typography>
         {showBuilder ? (
-          <FormBuilder onPreview={handlePreview} />
+          <FormBuilder onPreview={handlePreview} useForm={useForm} />
         ) : (
-          <FormPreview 
+          <FormPreview
             fields={formFields}
-            onSubmit={handleSubmit}
+            onSubmit={useForm ? onSubmitOverride : handleSubmit}
             onBack={handleBack}
             onDownload={handleDownload}
+            useForm={useForm}
           />
         )}
       </Box>

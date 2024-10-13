@@ -1,53 +1,62 @@
-import React, { useState, useRef } from 'react';
-import { 
-  Button, 
-  Paper, 
-  Box, 
-  TextField, 
-  MenuItem, 
-  IconButton, 
-  List, 
-  ListItem, 
-  ListItemText, 
-  ListItemSecondaryAction
-} from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import AddIcon from '@mui/icons-material/Add';
-import UploadFileIcon from '@mui/icons-material/UploadFile';
-import PreviewIcon from '@mui/icons-material/Preview';
+import React, { useState, useRef } from "react";
+import {
+  Button,
+  Paper,
+  Box,
+  TextField,
+  MenuItem,
+  IconButton,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction,
+} from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
+import UploadFileIcon from "@mui/icons-material/UploadFile";
+import PreviewIcon from "@mui/icons-material/Preview";
 
-const fieldTypes = ['text', 'email', 'password', 'number', 'select'];
+const fieldTypes = ["text", "email", "password", "number", "select"];
 
-const FormBuilder = ({ onPreview }) => {
+const FormBuilder = ({ onPreview, useForm }) => {
   const [fields, setFields] = useState([]);
   const [currentField, setCurrentField] = useState({
-    label: '',
-    type: 'text',
-    name: '',
+    label: "",
+    type: "text",
+    name: "",
     required: false,
-    options: ''
+    options: "",
   });
   const fileInputRef = useRef(null);
 
   const handleFieldChange = (e) => {
     const { name, value } = e.target;
-    setCurrentField(prev => ({ ...prev, [name]: value }));
+    setCurrentField((prev) => ({ ...prev, [name]: value }));
   };
 
   const addField = () => {
     const newField = {
       ...currentField,
-      options: currentField.type === 'select' ? currentField.options.split(',').map(option => ({ 
-        value: option.trim(), 
-        label: option.trim() 
-      })) : undefined
+      options:
+        currentField.type === "select"
+          ? currentField.options.split(",").map((option) => ({
+              value: option.trim(),
+              label: option.trim(),
+            }))
+          : undefined,
     };
-    setFields(prev => [...prev, newField]);
-    setCurrentField({ label: '', type: 'text', name: '', required: false, options: '' });
+    setFields((prev) => [...prev, newField]);
+    setCurrentField({
+      label: "",
+      type: "text",
+      name: "",
+      required: false,
+      options: "",
+    });
   };
 
   const removeField = (index) => {
-    setFields(prev => prev.filter((_, i) => i !== index));
+    setFields((prev) => prev.filter((_, i) => i !== index));
   };
 
   const handleFileUpload = (event) => {
@@ -59,8 +68,8 @@ const FormBuilder = ({ onPreview }) => {
           const schema = JSON.parse(e.target.result);
           setFields(schema);
         } catch (error) {
-          console.error('Error parsing JSON:', error);
-          alert('Invalid JSON file. Please upload a valid schema.');
+          console.error("Error parsing JSON:", error);
+          alert("Invalid JSON file. Please upload a valid schema.");
         }
       };
       reader.readAsText(file);
@@ -95,11 +104,13 @@ const FormBuilder = ({ onPreview }) => {
           onChange={handleFieldChange}
           margin="normal"
         >
-          {fieldTypes.map(type => (
-            <MenuItem key={type} value={type}>{type}</MenuItem>
+          {fieldTypes.map((type) => (
+            <MenuItem key={type} value={type}>
+              {type}
+            </MenuItem>
           ))}
         </TextField>
-        {currentField.type === 'select' && (
+        {currentField.type === "select" && (
           <TextField
             fullWidth
             label="Options (comma-separated)"
@@ -145,7 +156,7 @@ const FormBuilder = ({ onPreview }) => {
         <input
           type="file"
           ref={fileInputRef}
-          style={{ display: 'none' }}
+          style={{ display: "none" }}
           onChange={handleFileUpload}
           accept=".json"
         />
@@ -153,9 +164,16 @@ const FormBuilder = ({ onPreview }) => {
         <List sx={{ mt: 2 }}>
           {fields.map((field, index) => (
             <ListItem key={index}>
-              <ListItemText primary={field.label} secondary={`${field.type} - ${field.name}`} />
+              <ListItemText
+                primary={field.label}
+                secondary={`${field.type} - ${field.name}`}
+              />
               <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="delete" onClick={() => removeField(index)}>
+                <IconButton
+                  edge="end"
+                  aria-label="delete"
+                  onClick={() => removeField(index)}
+                >
                   <DeleteIcon />
                 </IconButton>
               </ListItemSecondaryAction>
@@ -171,7 +189,7 @@ const FormBuilder = ({ onPreview }) => {
           fullWidth
           sx={{ mt: 2 }}
         >
-          Preview Form
+          {useForm ? "Use Form" : "Preview Form"}
         </Button>
       </Box>
     </Paper>
